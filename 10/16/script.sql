@@ -1,0 +1,48 @@
+-- DO $$
+-- DECLARE
+--     --1. DECLARAÇÃO
+--     -- esse é um cursor não vinculado de query dinamica
+--     cur_nomes_a_partir_de REFCURSOR;
+--     v_youtuber VARCHAR(200);
+--     v_ano INT := 2008;
+--     v_nome_tabela VARCHAR(200) := 'tb_top_youtubers';
+-- BEGIN
+--     --2. ABERTURA
+--     OPEN cur_nomes_a_partir_de FOR EXECUTE
+--         format(
+--             '
+--                 SELECT youtuber FROM %s WHERE started >= $1
+--             ',
+--             v_nome_tabela
+--         )USING v_ano;
+--     LOOP
+--         --3. RECUPERAÇÃO
+--         FETCH cur_nomes_a_partir_de INTO v_youtuber;
+--         EXIT WHEN NOT FOUND;
+--         RAISE NOTICE '%', v_youtuber;
+--     END LOOP;
+--     --4. FECHAMENTO
+--     CLOSE cur_nomes_a_partir_de;
+-- END;
+-- $$
+
+-- DO $$
+-- DECLARE
+--     --1. DECLARAÇÃO
+--     --esse é um cursor não vinculado (unbound)
+--     cur_nomes_youtubers REFCURSOR;
+--     v_youtuber VARCHAR(200);
+-- BEGIN
+--     --2. ABERTURA
+--     OPEN cur_nomes_youtubers FOR
+--         SELECT youtuber FROM tb_top_youtubers;
+--     LOOP
+--         --3. RECUPERAÇÃO
+--         FETCH cur_nomes_youtubers INTO v_youtuber;
+--         EXIT WHEN NOT FOUND;
+--         RAISE NOTICE '%', v_youtuber;
+--     END LOOP;
+--     --4. FECHAMENTO
+--     CLOSE cur_nomes_youtubers;
+-- END;
+-- $$
